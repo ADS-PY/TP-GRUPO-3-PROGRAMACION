@@ -1,5 +1,3 @@
-Aquí tienes el texto organizado y estructurado con formato **Markdown** estándar y limpio (ideal para un archivo `README.md` de GitHub):
-
 ```markdown
 # consulir-app
 
