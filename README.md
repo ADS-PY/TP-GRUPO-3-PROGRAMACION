@@ -79,6 +79,10 @@ Todos los comentarios técnicos del código base se mantienen en **español**, p
 ## 👥 Equipo
 
 * **TP-GRUPO-3-PROGRAMACION**
+Agustin
+Lucas
+Marcelo
+Miguel
 
 ```
 
