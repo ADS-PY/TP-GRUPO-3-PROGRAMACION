@@ -34,7 +34,12 @@ function LandingPage() {
 
       <main className="flex-grow pt-20">
         {/* ── Hero banner ──────────────────────────────────── */}
-        <HeroSection />
+        <HeroSection
+          title="Gestión de Alto Impacto"
+          subtitle="Potenciamos su crecimiento institucional con precisión matemática y visión estratégica de mercado."
+          showLogo
+          minHeight="h-[65vh]"
+        />
 
         {/* ── Bento-grid action canvas ─────────────────────── */}
         <section className="max-w-7xl mx-auto px-margin-desktop relative z-20 pb-3xl">
