@@ -1,8 +1,7 @@
-// src/App.jsx
-import AppRouter from './routes/AppRouter';
+import RegisterForm from "./components/auth/RegisterForm";
 
 function App() {
-  return <AppRouter />;
+  return <RegisterForm />;
 }
 
 export default App;
