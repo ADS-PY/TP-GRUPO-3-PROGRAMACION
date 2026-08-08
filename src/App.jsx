@@ -1,4 +1,5 @@
 import AuthCard from "./components/auth/AuthCard";
+import InfoCard from "./components/cards/InfoCard";
 import "./App.css";
 
 function App() {
@@ -12,7 +13,25 @@ function App() {
 
   return (
     <main className="app-page">
-      <AuthCard onLogin={handleLogin} onRegister={handleRegister} />
+      <div className="app-content">
+        <AuthCard onLogin={handleLogin} onRegister={handleRegister} />
+
+        <section className="info-card-grid" aria-label="Información destacada">
+          <InfoCard
+            icon="monitoring"
+            title="Mercado Hoy"
+            description="Consultá información clave para entender mejor tus decisiones financieras."
+            variant="primary"
+          />
+
+          <InfoCard
+            icon="shield_lock"
+            title="Seguridad Total"
+            description="Tus datos se gestionan con foco en privacidad, acceso seguro y buenas prácticas."
+            variant="secondary"
+          />
+        </section>
+      </div>
     </main>
   );
 }
