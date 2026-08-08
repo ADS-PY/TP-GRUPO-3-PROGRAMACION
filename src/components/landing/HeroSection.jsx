@@ -18,24 +18,24 @@ const DEFAULT_BG_URL =
  *
  * Props:
  * ┌───────────────────┬────────────────────────────────────────────────────────┐
- * │ title             │ Título principal (h1). String o nodo JSX.              │
- * │ subtitle          │ Subtítulo/bajada. String o nodo JSX.                   │
+ * │ title             │ Título principal (h1). Texto o nodo JSX.               │
+ * │ subtitle          │ Subtítulo/bajada. Texto o nodo JSX.                    │
  * │ logoUrl           │ URL del logo centrado sobre el título.                 │
  * │ logoAlt           │ Texto alternativo del logo.                            │
- * │ showLogo          │ Mostrar u ocultar el logo (default: true).             │
+ * │ showLogo          │ Mostrar u ocultar el logo (por defecto: true).         │
  * │ backgroundUrl     │ URL de imagen de fondo (superpuesta al gradiente).     │
  * │ backgroundOpacity │ Opacidad de la imagen de fondo (0–100, default: 10).  │
  * │ minHeight         │ Altura mínima de la sección (clase Tailwind o CSS).    │
- * │ children          │ Contenido extra renderizado debajo del subtítulo.      │
+ * │ children          │ Contenido adicional renderizado debajo del subtítulo.  │
  * └───────────────────┴────────────────────────────────────────────────────────┘
  *
- * Ejemplo de uso — Landing page (default):
+ * Ejemplo de uso — página principal (por defecto):
  *   <HeroSection
  *     title="Gestión de Alto Impacto"
  *     subtitle="Potenciamos su crecimiento institucional..."
  *   />
  *
- * Ejemplo de uso — Dashboard interno (sin logo, height menor):
+ * Ejemplo de uso — panel interno (sin logo y con menor altura):
  *   <HeroSection
  *     title="Bienvenido, Juan"
  *     subtitle="Resumen de su cartera al día de hoy"
@@ -61,14 +61,14 @@ function HeroSection({
         'relative kinetic-gradient hero-curve',
         'flex flex-col items-center justify-center',
         'overflow-hidden',
-        // ── Responsive height ──────────────────────────
-        // En mobile usamos min-h en lugar de h fija para que
+        // ── Altura adaptable ─────────────────────────────
+        // En móvil usamos min-h en lugar de una h fija para que
         // el contenido nunca quede recortado.
         'min-h-[320px] md:min-h-0',
         minHeight,
       ].join(' ')}
     >
-      {/* ── Imagen de fondo (pattern / foto) ─────────── */}
+      {/* ── Imagen de fondo (patrón o foto) ───────────── */}
       {backgroundUrl && (
         <div
           aria-hidden="true"
@@ -91,7 +91,7 @@ function HeroSection({
               alt={logoAlt}
               className={[
                 'brightness-0 invert mx-auto mb-xl',
-                // Responsive: logo más pequeño en mobile
+                // Adaptación: logo más pequeño en móvil
                 'h-20 md:h-32',
               ].join(' ')}
             />
@@ -101,7 +101,7 @@ function HeroSection({
           <h1
             className={[
               'text-on-primary font-display-lg mb-md',
-              // Responsive typography: headline-lg-mobile en mobile, display-lg en desktop
+              // Tipografía adaptable: headline-lg-mobile en móvil y display-lg en escritorio
               'text-headline-lg-mobile md:text-display-lg',
               'font-headline-lg-mobile md:font-display-lg',
             ].join(' ')}
@@ -116,7 +116,7 @@ function HeroSection({
             </p>
           )}
 
-          {/* Slot para contenido extra (CTA buttons, etc.) */}
+          {/* Espacio para contenido adicional (botones CTA, etc.) */}
           {children && (
             <div className="mt-xl">
               {children}

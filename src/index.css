@@ -1,4 +1,4 @@
-/* Google Fonts */
+/* Fuentes de Google */
 @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
@@ -17,25 +17,25 @@
 }
 
 @layer components {
-  /* Kinetic gradient background */
+  /* Fondo con gradiente dinámico */
   .kinetic-gradient {
     background: linear-gradient(135deg, #006a62 0%, #00a99d 100%);
   }
 
-  /* Hero bottom curve */
+  /* Curva inferior de la sección principal */
   .hero-curve {
     border-bottom-left-radius: 50% 15%;
     border-bottom-right-radius: 50% 15%;
   }
 
-  /* Glassmorphism card */
+  /* Tarjeta con efecto de cristal */
   .glass-card {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(34, 34, 34, 0.08);
   }
 
-  /* Material Symbols base settings */
+  /* Configuración base de los íconos Material Symbols */
   .material-symbols-outlined {
     font-family: 'Material Symbols Outlined', sans-serif;
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -52,7 +52,7 @@
 }
 
 @layer utilities {
-  /* Fade-in animation */
+  /* Animación de aparición gradual */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }

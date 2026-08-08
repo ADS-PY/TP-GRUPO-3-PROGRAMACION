@@ -11,7 +11,7 @@ function AuthCard({ onLogin, onRegister }) {
         Acceda a su panel de control personalizado para gestionar sus activos y
         visualizar informes en tiempo real.
       </p>
-      {/* Action buttons */}
+      {/* Botones de acción */}
       <div className="flex flex-wrap gap-lg">
         <button
           type="button"
@@ -31,7 +31,7 @@ function AuthCard({ onLogin, onRegister }) {
           Registrar
         </button>
       </div>
-      {/* Help links */}
+      {/* Enlaces de ayuda */}
       <div className="mt-xl flex items-center gap-md">
         <a
           href="#"

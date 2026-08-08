@@ -11,8 +11,8 @@ import Footer from './Footer';
 /**
  * LandingPage
  *
- * Top-level page component that assembles the full marketing / auth
- * landing screen from its dedicated sub-components.
+ * Componente de página principal que ensambla la pantalla de presentación
+ * y acceso a partir de sus subcomponentes dedicados.
  */
 function LandingPage() {
   const navigate = useNavigate();
@@ -22,11 +22,11 @@ function LandingPage() {
 
   return (
     <div className="bg-surface font-body-md text-on-surface min-h-screen flex flex-col">
-      {/* ── Fixed top navigation ─────────────────────────── */}
+      {/* ── Navegación superior fija ──────────────────────── */}
       <Header onLoginClick={goToLogin} />
 
       <main className="flex-grow pt-20">
-        {/* ── Hero banner ──────────────────────────────────── */}
+        {/* ── Banner principal ─────────────────────────────── */}
         <HeroSection
           title="Gestión de Alto Impacto"
           subtitle="Potenciamos su crecimiento institucional con precisión matemática y visión estratégica de mercado."
@@ -34,28 +34,28 @@ function LandingPage() {
           minHeight="h-[65vh]"
         />
 
-        {/* ── Bento-grid action canvas ─────────────────────── */}
+        {/* ── Área de acciones en cuadrícula bento ─────────── */}
         <section className="max-w-7xl mx-auto px-margin-desktop relative z-20 pb-3xl">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-lg">
-            {/* Left: Login / Register card (8 cols) */}
+            {/* Izquierda: tarjeta de acceso y registro (8 columnas) */}
             <AuthCard
               onLogin={goToLogin}
               onRegister={goToRegister}
             />
 
-            {/* Right: stacked info cards (4 cols) */}
+            {/* Derecha: tarjetas informativas apiladas (4 columnas) */}
             <div className="md:col-span-4 flex flex-col gap-lg">
               <InfoCard />
               <SecurityCard />
             </div>
           </div>
 
-          {/* ── Stats / KPI bar ────────────────────────────── */}
+          {/* ── Barra de estadísticas e indicadores ────────── */}
           <StatsBar />
         </section>
       </main>
 
-      {/* ── Footer ───────────────────────────────────────── */}
+      {/* ── Pie de página ─────────────────────────────────── */}
       <Footer />
     </div>
   );

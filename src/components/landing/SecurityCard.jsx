@@ -1,5 +1,5 @@
 // src/components/landing/SecurityCard.jsx
-// "Seguridad Total" card
+// Tarjeta "Seguridad Total"
 
 function SecurityCard() {
   return (

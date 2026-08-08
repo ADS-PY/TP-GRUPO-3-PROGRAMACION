@@ -1,5 +1,5 @@
 // src/components/landing/InfoCard.jsx
-// "Mercado Hoy" card — market trends info panel
+// Tarjeta "Mercado Hoy" — panel informativo de tendencias del mercado
 
 function InfoCard() {
   return (
@@ -16,7 +16,7 @@ function InfoCard() {
       <p className="font-body-sm text-on-primary-fixed-variant">
         Tendencias alcistas en sectores tecnológicos y energía renovable.
       </p>
-      {/* Progress bar */}
+      {/* Barra de progreso */}
       <div className="mt-md h-2 bg-on-primary-fixed/10 rounded-full overflow-hidden">
         <div className="w-[75%] h-full kinetic-gradient" />
       </div>

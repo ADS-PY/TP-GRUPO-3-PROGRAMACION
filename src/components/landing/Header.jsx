@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const LOGO_URL =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuD5OEDm1mcfNsNHTKHxW_6B_dEHKrwJfsaKfQhjiCb4qmzxkfK7vxdlQCcMGspDcRtGIt7GIJd-y9VyauMOxi-R6Ykr4lHDN_HxYnXhIQcibwwF4o8I5xKOaLWSf_mKgaLlwDfRW126VzZe2zff4mAlLauXADMSl2nNRiqmGMtTPP9WwRAUhoKEDq6vBHyb8_PhwpVj7B45AYBlUCpJTJhFEMfSyryWCustLsNc6UswUgQJrnj0S2IHIw9xiocMVtIsCKXBP7mWs9LT';
 
-/** Links de navegación que se muestran si no se pasan props */
+/** Enlaces de navegación que se muestran si no se reciben propiedades */
 const DEFAULT_NAV_LINKS = [
   { label: 'Servicios', href: '#servicios', active: true },
   { label: 'Nosotros',  href: '#nosotros',  active: false },
@@ -44,11 +44,11 @@ function useScrolled(threshold = 50) {
  *
  * Props:
  * ┌─────────────────┬───────────────────────────────────────────────────┐
- * │ navLinks        │ Array de { label, href, active? } para la nav.    │
- * │ logoUrl         │ URL del logo (override del default).               │
+ * │ navLinks        │ Arreglo de { label, href, active? } para la nav.  │
+ * │ logoUrl         │ URL del logo (reemplaza el valor por defecto).     │
  * │ logoAlt         │ Texto alternativo del logo.                        │
- * │ onLoginClick    │ Callback del botón "Ingresar".                     │
- * │ loginLabel      │ Etiqueta del botón CTA (default: "Ingresar").      │
+ * │ onLoginClick    │ Función del botón "Ingresar".                     │
+ * │ loginLabel      │ Etiqueta del CTA (por defecto: "Ingresar").       │
  * │ scrollThreshold │ Píxeles de scroll antes de aplicar sombra/blur.   │
  * └─────────────────┴───────────────────────────────────────────────────┘
  */
@@ -88,7 +88,7 @@ function Header({
         />
       </a>
 
-      {/* ── Navegación desktop ───────────────────────────── */}
+      {/* ── Navegación para escritorio ───────────────────── */}
       <nav aria-label="Navegación principal" className="hidden md:flex items-center gap-xl">
         {navLinks.map(({ label, href, active }) => (
           <a
@@ -121,7 +121,7 @@ function Header({
         </button>
       </nav>
 
-      {/* ── Menú hamburguesa (mobile) ────────────────────── */}
+      {/* ── Menú hamburguesa (móvil) ─────────────────────── */}
       <button
         type="button"
         aria-label="Abrir menú"
