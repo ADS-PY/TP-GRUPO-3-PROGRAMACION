@@ -4,6 +4,7 @@ import InfoCard from "./components/cards/InfoCard";
 import Footer from "./components/layout/Footer";
 import StatsBar from "./components/stats/StatsBar";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import "./App.css";
 
 const landingStats = [
@@ -33,8 +34,8 @@ function HomePage() {
   };
 
   const handleRegister = () => {
-    console.log("Click en Registrar");
-  };
+  navigate("/registro");
+};
 
   return (
     <div className="app-layout">
@@ -75,6 +76,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/registro" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   );
