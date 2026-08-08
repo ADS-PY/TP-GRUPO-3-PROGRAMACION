@@ -16,17 +16,17 @@ function AuthCard({ onLogin, onRegister }) {
         <button
           type="button"
           onClick={onLogin}
-          className="flex items-center gap-sm px-12 py-4 bg-primary text-on-primary text-headline-md font-semibold rounded-xl shadow-lg hover:bg-primary-container transition-all active:scale-95 group"
+          className="flex w-full sm:w-auto justify-center items-center gap-sm px-6 sm:px-12 py-4 bg-primary text-on-primary text-headline-md font-semibold rounded-xl shadow-lg hover:bg-primary-container transition-all active:scale-95 group"
         >
           Ingresar
-          <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
+          <span className="material-symbols-outlined text-[24px] shrink-0 group-hover:translate-x-1 transition-transform">
             arrow_forward
           </span>
         </button>
         <button
           type="button"
           onClick={onRegister}
-          className="px-12 py-4 bg-white border-2 border-primary text-primary text-headline-md font-semibold rounded-xl hover:bg-primary/5 transition-all active:scale-95"
+          className="w-full sm:w-auto px-6 sm:px-12 py-4 bg-white border-2 border-primary text-primary text-headline-md font-semibold rounded-xl hover:bg-primary/5 transition-all active:scale-95"
         >
           Registrar
         </button>
