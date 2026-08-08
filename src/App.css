@@ -23,6 +23,12 @@
   align-items: center;
 }
 
+.app-side-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
 .info-card-grid {
   display: flex;
   flex-direction: column;
