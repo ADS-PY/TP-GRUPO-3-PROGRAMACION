@@ -1,3 +1,4 @@
+import consulirLogo from "../../assets/brand/consulir-logo.png";
 import "./AuthCard.css";
 
 export default function AuthCard({ onLogin, onRegister }) {
@@ -5,7 +6,11 @@ export default function AuthCard({ onLogin, onRegister }) {
     <section className="auth-card" aria-labelledby="auth-card-title">
       <div className="auth-card__brand">
         <div className="auth-card__logo" aria-hidden="true">
-          C
+          <img
+  src={consulirLogo}
+  alt="Consulir"
+  className="auth-card__logo-image"
+/>
         </div>
 
         <div>
