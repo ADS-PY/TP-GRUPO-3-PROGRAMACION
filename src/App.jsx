@@ -1,12 +1,14 @@
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import AuthCard from "./components/auth/AuthCard";
 import InfoCard from "./components/cards/InfoCard";
 import Footer from "./components/layout/Footer";
 import StatsBar from "./components/stats/StatsBar";
+import LoginPage from "./pages/LoginPage";
 import "./App.css";
 
 const landingStats = [
   {
-    value: "+500",
+    value: "+250",
     label: "Usuarios proyectados",
   },
   {
@@ -23,9 +25,11 @@ const landingStats = [
   },
 ];
 
-function App() {
+function HomePage() {
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-    console.log("Click en Ingresar");
+    navigate("/login");
   };
 
   const handleRegister = () => {
@@ -62,6 +66,17 @@ function App() {
 
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
