@@ -1,3 +1,10 @@
+.auth-card__logo-image {
+  width: 100px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
 .auth-card {
   width: 100%;
   max-width: 430px;
@@ -109,6 +116,8 @@
   color: #8a9695;
   font-size: 14px;
 }
+
+
 
 .auth-card__link {
   color: #007f76;
