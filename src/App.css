@@ -1,4 +1,11 @@
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .app-page {
+  flex: 1;
   min-height: 100vh;
   background: #f6f7f7;
   display: flex;
@@ -14,6 +21,12 @@
   grid-template-columns: minmax(280px, 430px) minmax(280px, 1fr);
   gap: 24px;
   align-items: center;
+}
+
+.app-side-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .info-card-grid {
