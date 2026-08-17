@@ -1,9 +1,11 @@
 // src/pages/Dashboard.jsx
+import { StatsBar } from '../components';
+
 function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
-      <p>Placeholder — esta ruta será protegida cuando se implemente autenticación.</p>
+      <StatsBar />
     </div>
   );
 }
