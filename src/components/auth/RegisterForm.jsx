@@ -151,7 +151,7 @@ export default function RegisterForm() {
       setFormData(initialFormData);
       setTouched({});
       setErrors({});
-    } catch (error) {
+    } catch {
       setGeneralError("Ocurrió un error al crear la cuenta. Intentá nuevamente.");
     } finally {
       setIsLoading(false);

@@ -1,6 +1,7 @@
 :root {
   --color-primary: #00a99d;
   --color-primary-dark: #007f76;
+  --color-primary-hover: #006b64;
   --color-secondary: #2bbb6d;
   --color-tertiary: #52c5bd;
   --color-neutral: #222222;
@@ -13,7 +14,7 @@
   --color-error: #c62828;
   --color-error-bg: #fdecea;
 
-  --color-success: #168a4a;
+  --color-success: #106c3a;
   --color-success-bg: #e7f7ed;
 
   --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.08);
@@ -102,7 +103,7 @@
 }
 
 .form-input::placeholder {
-  color: #a6afae;
+  color: #6f7877;
 }
 
 .form-input:focus {
@@ -212,7 +213,7 @@
 }
 
 .submit-button:hover:not(:disabled) {
-  background: var(--color-primary);
+  background: var(--color-primary-hover);
   transform: translateY(-1px);
 }
 
