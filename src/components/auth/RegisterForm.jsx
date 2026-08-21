@@ -164,9 +164,9 @@ export default function RegisterForm() {
   const handleLogin = async () => {
     setSuccessMessage("");
     setGeneralError("");
+    setActiveAction("login");
 
     try {
-      setActiveAction("login");
       if (typeof navigator !== "undefined" && !navigator.onLine) {
         throw new Error("Sin conexión");
       }
@@ -175,7 +175,6 @@ export default function RegisterForm() {
       window.location.assign("/dashboard");
     } catch {
       setGeneralError("No se pudo iniciar sesión en este momento. Intentá nuevamente.");
-    } finally {
       setActiveAction("");
     }
   };
