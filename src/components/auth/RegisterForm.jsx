@@ -169,13 +169,15 @@ export default function RegisterForm() {
       setActiveAction("login");
       await new Promise((resolve) => setTimeout(resolve, 1200));
 
-      if (typeof window?.location?.assign !== "function") {
-        throw new Error("Navegación no disponible");
+      if (typeof navigator !== "undefined" && !navigator.onLine) {
+        throw new Error("Sin conexión");
       }
 
+      setActiveAction("");
       window.location.assign("/dashboard");
     } catch {
       setGeneralError("No se pudo iniciar sesión en este momento. Intentá nuevamente.");
+    } finally {
       setActiveAction("");
     }
   };
