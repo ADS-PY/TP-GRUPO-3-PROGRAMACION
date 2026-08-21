@@ -11,10 +11,13 @@ export default function RegisterForm() {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [activeAction, setActiveAction] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [generalError, setGeneralError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const isRegisterLoading = activeAction === "register";
+  const isLoginLoading = activeAction === "login";
+  const isLoading = isRegisterLoading || isLoginLoading;
 
   const validateField = (name, value) => {
     const cleanValue = value.trim();
@@ -127,7 +130,7 @@ export default function RegisterForm() {
     }
 
     try {
-      setIsLoading(true);
+      setActiveAction("register");
 
       /*
         Simulación de petición HTTP.
@@ -154,7 +157,26 @@ export default function RegisterForm() {
     } catch {
       setGeneralError("Ocurrió un error al crear la cuenta. Intentá nuevamente.");
     } finally {
-      setIsLoading(false);
+      setActiveAction("");
+    }
+  };
+
+  const handleLogin = async () => {
+    setSuccessMessage("");
+    setGeneralError("");
+
+    try {
+      setActiveAction("login");
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+
+      if (typeof window?.location?.assign !== "function") {
+        throw new Error("Navegación no disponible");
+      }
+
+      window.location.assign("/dashboard");
+    } catch {
+      setGeneralError("No se pudo iniciar sesión en este momento. Intentá nuevamente.");
+      setActiveAction("");
     }
   };
 
@@ -274,13 +296,29 @@ export default function RegisterForm() {
             className="submit-button"
             disabled={isLoading || !isFormValid}
           >
-            {isLoading ? (
+            {isRegisterLoading ? (
               <span className="button-loading">
                 <span className="spinner" aria-hidden="true"></span>
-                Procesando...
+                Registrando...
               </span>
             ) : (
               "Registrarse"
+            )}
+          </button>
+
+          <button
+            type="button"
+            className="submit-button secondary-button"
+            onClick={handleLogin}
+            disabled={isLoading}
+          >
+            {isLoginLoading ? (
+              <span className="button-loading">
+                <span className="spinner" aria-hidden="true"></span>
+                Ingresando...
+              </span>
+            ) : (
+              "Ingresar"
             )}
           </button>
         </form>
