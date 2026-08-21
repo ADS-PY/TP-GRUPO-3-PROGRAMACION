@@ -167,13 +167,11 @@ export default function RegisterForm() {
 
     try {
       setActiveAction("login");
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-
       if (typeof navigator !== "undefined" && !navigator.onLine) {
         throw new Error("Sin conexión");
       }
 
-      setActiveAction("");
+      await new Promise((resolve) => setTimeout(resolve, 1200));
       window.location.assign("/dashboard");
     } catch {
       setGeneralError("No se pudo iniciar sesión en este momento. Intentá nuevamente.");
