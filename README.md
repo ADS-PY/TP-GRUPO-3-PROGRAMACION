@@ -70,6 +70,43 @@ src/
 
 ---
 
+## 🌐 API interna — Endpoints
+
+### `GET /stats` (mock temporal)
+
+Devuelve las estadísticas resumidas del período actual para alimentar el componente `StatsBar`.
+
+**Implementación actual:** mock en `src/services/statsService.js` → función `getStats()`.  
+**Reemplazar por:** `fetch('/api/stats')` cuando el backend esté disponible.
+
+#### Respuesta esperada
+
+```json
+{
+  "ingresos":      152000,
+  "gastos":         87500,
+  "balance":        64500,
+  "transacciones":     34
+}
+```
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `ingresos` | `number` | Total de ingresos del período (ARS) |
+| `gastos` | `number` | Total de gastos del período (ARS) |
+| `balance` | `number` | Diferencia `ingresos - gastos` (ARS) |
+| `transacciones` | `number` | Cantidad de transacciones registradas |
+
+#### Componentes que consumen este endpoint
+
+| Elemento | Archivo |
+|---|---|
+| Servicio | `src/services/statsService.js` |
+| Hook | `src/hooks/useStats.js` |
+| Componente | `src/components/StatsBar/StatsBar.jsx` |
+
+---
+
 ## 🌐 Idioma del proyecto
 
 Todos los comentarios técnicos del código base se mantienen en **español**, para asegurar coherencia y facilitar la comprensión dentro del equipo.
