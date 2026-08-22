@@ -82,6 +82,27 @@ export const validateRegisterForm = (formData) => {
   return errors;
 };
 
+export const validateLoginField = (fieldName, value) => {
+  if (fieldName === "email") return validateEmail(value);
+
+  if (fieldName === "password" && !value) {
+    return "La contraseña es obligatoria.";
+  }
+
+  return "";
+};
+
+export const validateLoginForm = (formData) => {
+  const errors = {};
+
+  Object.keys(formData).forEach((fieldName) => {
+    const error = validateLoginField(fieldName, formData[fieldName]);
+    if (error) errors[fieldName] = error;
+  });
+
+  return errors;
+};
+
 export const hasValidationErrors = (errors) => {
   return Object.values(errors).some(Boolean);
 };

@@ -7,3 +7,4 @@ export { default as InfoCard } from './landing/InfoCard';
 export { default as SecurityCard } from './landing/SecurityCard';
 export { default as StatsBar } from './landing/StatsBar';
 export { default as Footer } from './landing/Footer';
+export { default as LoginForm } from './auth/LoginForm';
