@@ -1,11 +1,8 @@
 // src/pages/Home.jsx
+import { LandingPage } from '../components';
+
 function Home() {
-  return (
-    <div>
-      <h1>Bienvenido</h1>
-      <p>Esta es una ruta pública, accesible para cualquier usuario.</p>
-    </div>
-  );
+  return <LandingPage />;
 }
 
 export default Home;

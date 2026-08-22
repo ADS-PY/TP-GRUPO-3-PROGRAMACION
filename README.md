@@ -1,4 +1,3 @@
-```markdown
 # consulir-app
 
 Aplicación web de finanzas personales — MVP desarrollado por el equipo **TP-GRUPO-3-PROGRAMACION**.
@@ -10,7 +9,7 @@ Aplicación web de finanzas personales — MVP desarrollado por el equipo **TP-G
 Cloná el repositorio e instalá las dependencias:
 
 ```bash
-git clone [https://github.com/ADS-PY/TP-GRUPO-3-PROGRAMACION.git](https://github.com/ADS-PY/TP-GRUPO-3-PROGRAMACION.git)
+git clone https://github.com/ADS-PY/TP-GRUPO-3-PROGRAMACION.git
 cd consulir-app
 npm install
 
@@ -79,11 +78,7 @@ Todos los comentarios técnicos del código base se mantienen en **español**, p
 ## 👥 Equipo
 
 * **TP-GRUPO-3-PROGRAMACION**
-Agustin
-Lucas
-Marcelo
-Miguel
-
-```
-
-```
+  * Agustin
+  * Lucas
+  * Marcelo
+  * Miguel
