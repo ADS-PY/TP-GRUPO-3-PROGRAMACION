@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 function ProtectedRoute({ children }) {
   // TODO: reemplazar por la lógica real de autenticación
-  const isAuthenticated = true; // placeholder temporal
+  const isAuthenticated = true; // valor temporal hasta integrar autenticación
 
   return isAuthenticated ? children : <Navigate to="/" replace />;
 }

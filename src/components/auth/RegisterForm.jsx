@@ -1,4 +1,8 @@
 import { useState } from "react";
+import {
+  validateRegisterField,
+  validateRegisterForm,
+} from "../../utils/authValidations";
 import "./RegisterForm.css";
 
 const initialFormData = {
@@ -19,48 +23,8 @@ export default function RegisterForm() {
   const isLoginLoading = activeAction === "login";
   const isLoading = isRegisterLoading || isLoginLoading;
 
-  const validateField = (name, value) => {
-    const cleanValue = value.trim();
-
-    if (name === "nombre") {
-      if (!cleanValue) return "El nombre es obligatorio.";
-      if (cleanValue.length < 3) return "El nombre debe tener al menos 3 caracteres.";
-    }
-
-    if (name === "email") {
-      if (!cleanValue) return "El correo electrónico es obligatorio.";
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(cleanValue)) {
-        return "Ingresá un correo electrónico válido.";
-      }
-    }
-
-    if (name === "password") {
-      if (!value) return "La contraseña es obligatoria.";
-      if (value.length < 8) return "La contraseña debe tener al menos 8 caracteres.";
-      if (!/[A-Z]/.test(value)) return "Debe incluir al menos una letra mayúscula.";
-      if (!/[0-9]/.test(value)) return "Debe incluir al menos un número.";
-    }
-
-    return "";
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    Object.keys(formData).forEach((fieldName) => {
-      const error = validateField(fieldName, formData[fieldName]);
-
-      if (error) {
-        newErrors[fieldName] = error;
-      }
-    });
-
-    return newErrors;
-  };
-
-  const formErrors = validateForm();
+ 
+  const formErrors = validateRegisterForm(formData);
   const isFormValid = Object.keys(formErrors).length === 0;
 
   const handleChange = (event) => {
@@ -75,7 +39,7 @@ export default function RegisterForm() {
     setGeneralError("");
 
     if (touched[name]) {
-      const fieldError = validateField(name, value);
+      const fieldError = validateRegisterField(name, value);
 
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -92,12 +56,12 @@ export default function RegisterForm() {
       [name]: true,
     }));
 
-    const fieldError = validateField(name, value);
+    const fieldError = validateRegisterField(name, value);
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: fieldError,
-    }));
+setErrors((prevErrors) => ({
+  ...prevErrors,
+  [name]: fieldError,
+}));
   };
 
   const getInputClassName = (fieldName) => {
@@ -112,7 +76,7 @@ export default function RegisterForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const validationErrors = validateForm();
+    const validationErrors = validateRegisterForm(formData);
 
     setTouched({
       nombre: true,
