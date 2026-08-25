@@ -15,7 +15,7 @@ const initialFormData = {
  * Formulario de autenticación desacoplado del transporte.
  * onSubmit debe devolver una promesa cuando se conecta a un backend.
  */
-export default function LoginForm({ onSubmit, isDisabled = false }) {
+export default function LoginForm({ onSubmit = () => Promise.resolve(), isDisabled = false }) {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
@@ -150,8 +150,4 @@ export default function LoginForm({ onSubmit, isDisabled = false }) {
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,
   isDisabled: PropTypes.bool,
-};
-
-LoginForm.defaultProps = {
-  onSubmit: () => Promise.resolve(),
 };
