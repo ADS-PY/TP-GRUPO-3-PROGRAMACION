@@ -69,6 +69,25 @@ src/
 
 ---
 
+## API interna temporal
+
+Mientras el backend no esté disponible, `GET /stats` se representa mediante el mock `getStats` en `src/services/statsService.js`.
+
+Respuesta esperada:
+
+```json
+[
+  { "value": "15k+", "label": "CLIENTES ACTIVOS" },
+  { "value": "$4.2B", "label": "ACTIVOS GESTIONADOS" },
+  { "value": "99.9%", "label": "TIEMPO DE ACTIVIDAD" },
+  { "value": "24/7", "label": "SOPORTE PREMIUM" }
+]
+```
+
+Cada elemento debe incluir `value` y `label` como cadenas. Al implementar el backend, `getStats` debe reemplazarse por la petición al endpoint `GET /stats` sin modificar el contrato que consume `StatsBar`.
+
+---
+
 ## 🌐 Idioma del proyecto
 
 Todos los comentarios técnicos del código base se mantienen en **español**, para asegurar coherencia y facilitar la comprensión dentro del equipo.
