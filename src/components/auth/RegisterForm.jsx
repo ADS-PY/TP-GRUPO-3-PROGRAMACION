@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import {
   validateRegisterField,
   validateRegisterForm,
@@ -11,7 +12,11 @@ const initialFormData = {
   password: "",
 };
 
-export default function RegisterForm() {
+/**
+ * Formulario de registro desacoplado del transporte.
+ * onSubmit debe devolver una promesa cuando se conecta a un backend.
+ */
+export default function RegisterForm({ onSubmit = () => Promise.resolve(), isDisabled = false }) {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
@@ -19,6 +24,8 @@ export default function RegisterForm() {
   const [successMessage, setSuccessMessage] = useState("");
   const [generalError, setGeneralError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const controlsDisabled = isDisabled || isLoading;
 
  
   const formErrors = validateRegisterForm(formData);
@@ -72,6 +79,7 @@ setErrors((prevErrors) => ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (controlsDisabled) return;
 
     const validationErrors = validateRegisterForm(formData);
 
@@ -92,31 +100,17 @@ setErrors((prevErrors) => ({
 
     try {
       setIsLoading(true);
-
-      /*
-        Simulación de petición HTTP.
-        Cuando exista backend, reemplazar este bloque por fetch o axios.
-
-        Ejemplo:
-        const response = await fetch("http://localhost:3000/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
-
-        if (!response.ok) {
-          throw new Error("No se pudo crear la cuenta.");
-        }
-      */
-
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
+      await onSubmit({
+        nombre: formData.nombre.trim(),
+        email: formData.email.trim(),
+        password: formData.password,
+      });
       setSuccessMessage("Cuenta creada correctamente. Redirigiendo...");
       setFormData(initialFormData);
       setTouched({});
       setErrors({});
-    } catch {
-      setGeneralError("Ocurrió un error al crear la cuenta. Intentá nuevamente.");
+    } catch (error) {
+      setGeneralError(error?.message || "Ocurrió un error al crear la cuenta. Intentá nuevamente.");
     } finally {
       setIsLoading(false);
     }
@@ -143,7 +137,7 @@ setErrors((prevErrors) => ({
           </div>
         )}
 
-        <form className="register-form" onSubmit={handleSubmit} noValidate>
+        <form className="register-form" onSubmit={handleSubmit} noValidate aria-busy={isLoading}>
           <div className="form-group">
             <label htmlFor="nombre">Nombre completo</label>
 
@@ -155,7 +149,7 @@ setErrors((prevErrors) => ({
               value={formData.nombre}
               onChange={handleChange}
               onBlur={handleBlur}
-              disabled={isLoading}
+              disabled={controlsDisabled}
               className={getInputClassName("nombre")}
               aria-invalid={Boolean(errors.nombre)}
               aria-describedby={errors.nombre ? "nombre-error" : undefined}
@@ -179,7 +173,7 @@ setErrors((prevErrors) => ({
               value={formData.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              disabled={isLoading}
+              disabled={controlsDisabled}
               className={getInputClassName("email")}
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "email-error" : undefined}
@@ -204,7 +198,7 @@ setErrors((prevErrors) => ({
                 value={formData.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                disabled={isLoading}
+                disabled={controlsDisabled}
                 className={getInputClassName("password")}
                 aria-invalid={Boolean(errors.password)}
                 aria-describedby={errors.password ? "password-error" : undefined}
@@ -214,7 +208,7 @@ setErrors((prevErrors) => ({
                 type="button"
                 className="password-toggle"
                 onClick={() => setShowPassword((prevValue) => !prevValue)}
-                disabled={isLoading}
+                disabled={controlsDisabled}
                 aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
               >
                 {showPassword ? "Ocultar" : "Ver"}
@@ -236,12 +230,12 @@ setErrors((prevErrors) => ({
           <button
             type="submit"
             className="submit-button"
-            disabled={isLoading || !isFormValid}
+            disabled={controlsDisabled || !isFormValid}
           >
             {isLoading ? (
               <span className="button-loading">
                 <span className="spinner" aria-hidden="true"></span>
-                Procesando...
+                Registrando…
               </span>
             ) : (
               "Registrarse"
@@ -252,3 +246,8 @@ setErrors((prevErrors) => ({
     </section>
   );
 }
+
+RegisterForm.propTypes = {
+  onSubmit: PropTypes.func,
+  isDisabled: PropTypes.bool,
+};
