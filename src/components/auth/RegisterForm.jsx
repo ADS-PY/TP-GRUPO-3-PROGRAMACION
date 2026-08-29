@@ -3,6 +3,7 @@ import {
   validateRegisterField,
   validateRegisterForm,
 } from "../../utils/authValidations";
+import { registerUser } from "../../services";
 import "./RegisterForm.css";
 
 const initialFormData = {
@@ -93,25 +94,14 @@ setErrors((prevErrors) => ({
     try {
       setIsLoading(true);
 
-      /*
-        Simulación de petición HTTP.
-        Cuando exista backend, reemplazar este bloque por fetch o axios.
+      const { error } = await registerUser(formData);
 
-        Ejemplo:
-        const response = await fetch("http://localhost:3000/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
+      if (error) {
+        setGeneralError(error);
+        return;
+      }
 
-        if (!response.ok) {
-          throw new Error("No se pudo crear la cuenta.");
-        }
-      */
-
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      setSuccessMessage("Cuenta creada correctamente. Redirigiendo...");
+      setSuccessMessage("Cuenta creada correctamente. Revisá tu correo para confirmar tu registro.");
       setFormData(initialFormData);
       setTouched({});
       setErrors({});
