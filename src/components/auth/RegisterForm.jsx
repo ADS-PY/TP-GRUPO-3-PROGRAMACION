@@ -94,9 +94,13 @@ setErrors((prevErrors) => ({
     try {
       setIsLoading(true);
 
-      const { error } = await registerUser(formData);
+      const { error, fieldErrors } = await registerUser(formData);
 
       if (error) {
+        // Si el backend devuelve errores de campo, los mostramos inline
+        if (fieldErrors) {
+          setErrors((prev) => ({ ...prev, ...fieldErrors }));
+        }
         setGeneralError(error);
         return;
       }

@@ -1,50 +1,37 @@
-// Servicio de autenticación: registrar usuario, iniciar y cerrar sesión.
-import { supabase } from './supabaseClient';
+// Servicio de autenticación: comunica el frontend con el backend Express.
+const API_URL = import.meta.env.VITE_API_URL;
 
 /**
- * Registra un nuevo usuario en Supabase Auth.
+ * Registra un nuevo usuario a través del backend.
  * @param {{ nombre: string, email: string, password: string }} datos
- * @returns {{ data: object|null, error: string|null }}
+ * @returns {{ data: object|null, error: string|null, fieldErrors: object|null }}
  */
 export async function registerUser({ nombre, email, password }) {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: { nombre },
-    },
-  });
+  try {
+    const response = await fetch(`${API_URL}/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, email, password }),
+    });
 
-  if (error) {
-    return { data: null, error: error.message };
+    const json = await response.json();
+
+    if (response.ok) {
+      return { data: json.data, error: null, fieldErrors: null };
+    }
+
+    // El backend devuelve errores de campo (400) o conflicto (409)
+    return {
+      data: null,
+      error: json.message ?? 'Error al crear la cuenta.',
+      fieldErrors: json.errors ?? null,
+    };
+  } catch {
+    return {
+      data: null,
+      error: 'No se pudo conectar con el servidor. Intentá nuevamente.',
+      fieldErrors: null,
+    };
   }
-
-  return { data, error: null };
 }
 
-/**
- * Inicia sesión con email y contraseña.
- * @param {{ email: string, password: string }} credenciales
- * @returns {{ data: object|null, error: string|null }}
- */
-export async function loginUser({ email, password }) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-
-  if (error) {
-    return { data: null, error: error.message };
-  }
-
-  return { data, error: null };
-}
-
-/**
- * Cierra la sesión activa.
- * @returns {{ error: string|null }}
- */
-export async function logoutUser() {
-  const { error } = await supabase.auth.signOut();
-  return { error: error ? error.message : null };
-}

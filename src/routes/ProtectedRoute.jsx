@@ -1,19 +1,11 @@
 // src/routes/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks';
 
 function ProtectedRoute({ children }) {
-  const { user, loading } = useAuth();
+  // TODO: reemplazar por la lógica real de autenticación (T-14/T-15)
+  const isAuthenticated = false; // valor temporal hasta integrar sesión
 
-  if (loading) {
-    return (
-      <div role="status" aria-label="Verificando sesión" style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-        <span className="spinner" aria-hidden="true" />
-      </div>
-    );
-  }
-
-  return user ? children : <Navigate to="/" replace />;
+  return isAuthenticated ? children : <Navigate to="/" replace />;
 }
 
 export default ProtectedRoute;
