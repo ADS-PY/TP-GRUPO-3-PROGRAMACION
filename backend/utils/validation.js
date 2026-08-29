@@ -1,6 +1,6 @@
 // Utilidades de validación de datos de entrada.
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[^@\s]{1,64}@[^@\s]{1,253}\.[^@\s.]{2,}$/;
 
 /**
  * Valida los datos del cuerpo de la petición de registro.

@@ -17,7 +17,7 @@ export async function registerUserInSupabase({ nombre, email, password }) {
     email: email.trim(),
     password,
     user_metadata: { nombre: nombre.trim() },
-    email_confirm: false,
+    email_confirm: true,
   });
 
   if (error) {
