@@ -6,7 +6,11 @@ function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return null; // o un spinner de carga global
+    return (
+      <div role="status" aria-label="Verificando sesión" style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
+        <span className="spinner" aria-hidden="true" />
+      </div>
+    );
   }
 
   return user ? children : <Navigate to="/" replace />;

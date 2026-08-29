@@ -11,16 +11,12 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Obtener la sesión inicial al montar el componente
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Escuchar cambios de sesión (login, logout, token refresh)
+    // onAuthStateChange dispara INITIAL_SESSION de forma síncrona al suscribirse,
+    // proveyendo la sesión actual sin necesidad de llamar a getSession por separado.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
+        setLoading(false);
       }
     );
 
