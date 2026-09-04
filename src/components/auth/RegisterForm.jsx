@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   validateRegisterField,
   validateRegisterForm,
 } from "../../utils/authValidations";
+import { registerUser } from "../../services/authService";
 import "./RegisterForm.css";
 
 const initialFormData = {
@@ -12,6 +14,7 @@ const initialFormData = {
 };
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
@@ -20,7 +23,6 @@ export default function RegisterForm() {
   const [generalError, setGeneralError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
- 
   const formErrors = validateRegisterForm(formData);
   const isFormValid = Object.keys(formErrors).length === 0;
 
@@ -55,19 +57,42 @@ export default function RegisterForm() {
 
     const fieldError = validateRegisterField(name, value);
 
-setErrors((prevErrors) => ({
-  ...prevErrors,
-  [name]: fieldError,
-}));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: fieldError,
+    }));
   };
 
   const getInputClassName = (fieldName) => {
     if (errors[fieldName]) return "form-input input-error";
+
     if (touched[fieldName] && !errors[fieldName] && formData[fieldName]) {
       return "form-input input-success";
     }
 
     return "form-input";
+  };
+
+  const getRegisterErrorMessage = (error) => {
+    const message = error?.message?.toLowerCase() || "";
+
+    if (message.includes("already registered") || message.includes("already exists")) {
+      return "El correo electrónico ya está registrado.";
+    }
+
+    if (message.includes("email") && message.includes("invalid")) {
+      return "El correo electrónico ingresado no es válido.";
+    }
+
+    if (message.includes("password")) {
+      return "La contraseña no cumple con los requisitos solicitados.";
+    }
+
+    if (message.includes("rate limit")) {
+      return "Se alcanzó el límite de intentos. Probá nuevamente más tarde.";
+    }
+
+    return "Ocurrió un error al crear la cuenta. Intentá nuevamente.";
   };
 
   const handleSubmit = async (event) => {
@@ -93,30 +118,24 @@ setErrors((prevErrors) => ({
     try {
       setIsLoading(true);
 
-      /*
-        Simulación de petición HTTP.
-        Cuando exista backend, reemplazar este bloque por fetch o axios.
-
-        Ejemplo:
-        const response = await fetch("http://localhost:3000/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
-
-        if (!response.ok) {
-          throw new Error("No se pudo crear la cuenta.");
-        }
-      */
-
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await registerUser({
+        nombre: formData.nombre,
+        email: formData.email,
+        password: formData.password,
+      });
 
       setSuccessMessage("Cuenta creada correctamente. Redirigiendo...");
       setFormData(initialFormData);
       setTouched({});
       setErrors({});
-    } catch {
-      setGeneralError("Ocurrió un error al crear la cuenta. Intentá nuevamente.");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+      setGeneralError(getRegisterErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
