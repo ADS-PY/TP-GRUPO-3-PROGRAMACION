@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   validateRegisterField,
   validateRegisterForm,
@@ -13,6 +14,7 @@ const initialFormData = {
 };
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
@@ -126,7 +128,13 @@ export default function RegisterForm() {
       setFormData(initialFormData);
       setTouched({});
       setErrors({});
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+
     } catch (error) {
+      console.error("Error al registrar usuario:", error);
       setGeneralError(getRegisterErrorMessage(error));
     } finally {
       setIsLoading(false);
