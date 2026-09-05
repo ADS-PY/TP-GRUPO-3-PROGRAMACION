@@ -42,9 +42,11 @@ incluye en la respuesta.
   "id": "b3f1c2a4-6e5d-4c9a-9b1a-8f2d3e4a5b6c",
   "nombre": "Juan Pérez",
   "email": "usuario@consulir.com",
-  "createdAt": "<fecha-hora-ISO-8601-de-ejemplo>"
+  "createdAt": "2024-01-15T10:30:00.000Z"
 }
 ```
+
+> Nota: los valores de `id` y `createdAt` son ilustrativos; no representan una fecha ni un identificador con significado especial.
 
 | Campo       | Tipo   | Descripción                                     |
 | ----------- | ------ | ------------------------------------------------ |
