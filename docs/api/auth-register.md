@@ -26,11 +26,13 @@ Crea una nueva cuenta de usuario en Consulir.
 
 | Campo      | Tipo   | Obligatorio | Restricciones                                                                                                                              |
 | ---------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `nombre`   | string | Sí          | Mínimo 3 caracteres (una vez recortados los espacios en los extremos).                                                                        |
+| `nombre`   | string | Sí          | Entre 3 y 100 caracteres (una vez recortados los espacios en los extremos).                                                                   |
 | `email`    | string | Sí          | Debe tener formato de email válido (`usuario@dominio.tld`). Debe ser único en el sistema.                                                     |
 | `password` | string | Sí          | Mínimo 8 caracteres. Debe incluir al menos una letra mayúscula, una letra minúscula y un número.                                              |
 
-No se aceptan campos adicionales a los definidos en la tabla anterior.
+No se aceptan campos adicionales a los definidos en la tabla anterior. Si la
+solicitud incluye campos no reconocidos, el servidor debe ignorarlos y
+procesar únicamente los campos definidos en este contrato.
 
 ### Respuesta exitosa — `201 Created`
 
