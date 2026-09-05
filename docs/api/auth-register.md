@@ -28,7 +28,7 @@ Crea una nueva cuenta de usuario en Consulir.
 | ---------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `nombre`   | string | Sí          | Entre 3 y 100 caracteres (una vez recortados los espacios en los extremos).                                                                   |
 | `email`    | string | Sí          | Debe tener formato de email válido (`usuario@dominio.tld`). Debe ser único en el sistema.                                                     |
-| `password` | string | Sí          | Mínimo 8 caracteres. Debe incluir al menos una letra mayúscula, una letra minúscula y un número.                                              |
+| `password` | string | Sí          | Entre 8 y 72 caracteres. Debe incluir al menos una letra mayúscula, una letra minúscula y un número.                                          |
 
 No se aceptan campos adicionales a los definidos en la tabla anterior. El
 servidor aplica **validación estricta**: si la solicitud incluye campos no
@@ -160,9 +160,11 @@ implementación.
 
 ### Referencia de implementación actual (frontend)
 
-Las reglas de validación descriptas en este documento están implementadas en
-[`src/utils/authValidations.js`](../../src/utils/authValidations.js) y
-utilizadas por [`src/components/auth/RegisterForm.jsx`](../../src/components/auth/RegisterForm.jsx).
-Al día de esta especificación, el frontend simula la llamada al backend; esta
-documentación define el contrato que deberá cumplir la implementación real del
-endpoint `POST /auth/register`.
+Las reglas de validación descriptas en este documento están implementadas
+actualmente en la lógica de validación de formularios de autenticación del
+frontend (ver `src/utils/authValidations.js` y
+`src/components/auth/RegisterForm.jsx` al momento de redactar este
+documento; si estos archivos se mueven o renombran, actualizar la
+referencia). Al día de esta especificación, el frontend simula la llamada al
+backend; esta documentación define el contrato que deberá cumplir la
+implementación real del endpoint `POST /auth/register`.
