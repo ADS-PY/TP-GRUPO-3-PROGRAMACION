@@ -69,6 +69,12 @@ src/
 
 ---
 
+## 📚 Documentación de la API
+
+* [`POST /auth/register`](./docs/api/auth-register.md) — Especificación técnica del endpoint de registro de usuarios.
+
+---
+
 ## 🌐 Idioma del proyecto
 
 Todos los comentarios técnicos del código base se mantienen en **español**, para asegurar coherencia y facilitar la comprensión dentro del equipo.
