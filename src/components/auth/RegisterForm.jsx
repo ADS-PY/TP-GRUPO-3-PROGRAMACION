@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   validateRegisterField,
   validateRegisterForm,
@@ -13,6 +14,7 @@ const initialFormData = {
 };
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
@@ -116,16 +118,24 @@ export default function RegisterForm() {
     try {
       setIsLoading(true);
 
-      await registerUser({
-        nombre: formData.nombre,
-        email: formData.email,
+      const data = await registerUser({
+        nombre: formData.nombre.trim(),
+        email: formData.email.trim(),
         password: formData.password,
       });
 
-      setSuccessMessage("Cuenta creada correctamente. Redirigiendo...");
       setFormData(initialFormData);
       setTouched({});
       setErrors({});
+
+      if (data.session) {
+        navigate("/");
+        return;
+      }
+
+      setSuccessMessage(
+        "Cuenta creada. Revisá tu correo para confirmarla antes de iniciar sesión.",
+      );
     } catch (error) {
       setGeneralError(getRegisterErrorMessage(error));
     } finally {
@@ -149,9 +159,14 @@ export default function RegisterForm() {
         )}
 
         {successMessage && (
-          <div className="alert alert-success" role="status">
-            {successMessage}
-          </div>
+          <>
+            <div className="alert alert-success" role="status">
+              {successMessage}
+            </div>
+            <p>
+              ¿Ya confirmaste tu correo? <Link to="/login">Iniciá sesión</Link>.
+            </p>
+          </>
         )}
 
         <form className="register-form" onSubmit={handleSubmit} noValidate>

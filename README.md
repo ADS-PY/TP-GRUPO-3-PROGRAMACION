@@ -15,6 +15,19 @@ npm install
 
 ```
 
+### Configuración de autenticación
+
+Para habilitar el registro e inicio de sesión con Supabase, copiá `.env.example`
+como `.env.local` y completá sus valores:
+
+```bash
+VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+VITE_SUPABASE_ANON_KEY=tu-clave-anon-publica
+```
+
+La clave debe ser la clave pública `anon` del proyecto de Supabase. No agregues
+claves privadas ni `service_role` al frontend.
+
 ---
 
 ## 🖥️ Ejecución del servidor de desarrollo
