@@ -34,6 +34,10 @@ No se aceptan campos adicionales a los definidos en la tabla anterior. Si la
 solicitud incluye campos no reconocidos, el servidor debe ignorarlos y
 procesar únicamente los campos definidos en este contrato.
 
+> Nota: las restricciones de longitud (`nombre`, `password`) se calculan por
+> cantidad de caracteres Unicode (code points), no por bytes. Por ejemplo,
+> "Juan Pérez" cuenta como 10 caracteres.
+
 ### Respuesta exitosa — `201 Created`
 
 Se retorna cuando el usuario fue creado correctamente. La contraseña **nunca** se
