@@ -30,9 +30,11 @@ Crea una nueva cuenta de usuario en Consulir.
 | `email`    | string | Sí          | Debe tener formato de email válido (`usuario@dominio.tld`). Debe ser único en el sistema.                                                     |
 | `password` | string | Sí          | Mínimo 8 caracteres. Debe incluir al menos una letra mayúscula, una letra minúscula y un número.                                              |
 
-No se aceptan campos adicionales a los definidos en la tabla anterior. Si la
-solicitud incluye campos no reconocidos, el servidor debe ignorarlos y
-procesar únicamente los campos definidos en este contrato.
+No se aceptan campos adicionales a los definidos en la tabla anterior. El
+servidor aplica **validación estricta**: si la solicitud incluye campos no
+reconocidos, responde `400 Bad Request` con `error.code = VALIDATION_ERROR`,
+indicando en `details` el/los campo/s no reconocido/s. Esto evita enmascarar
+errores del cliente (por ejemplo, nombres de campo mal escritos).
 
 > Nota: las restricciones de longitud (`nombre`, `password`) se calculan por
 > cantidad de caracteres Unicode (code points), no por bytes. Por ejemplo,
@@ -94,10 +96,17 @@ procesarla de forma consistente:
 #### `400 Bad Request`
 
 Se retorna cuando el cuerpo de la solicitud es inválido: faltan campos
-obligatorios, o alguno de los campos no cumple con el formato/restricciones
+obligatorios, alguno de los campos no cumple con el formato/restricciones
 descriptas en la sección de *Request body* (por ejemplo: email con formato
 inválido, contraseña que no cumple con la complejidad requerida, nombre con
-menos de 3 caracteres).
+menos de 3 caracteres), o se envían campos no reconocidos.
+
+La validación de **formato** de `email` (y del resto de los campos) se
+realiza en el momento de la solicitud y corresponde a `400 Bad Request`. La
+validación de **unicidad** del `email` (si ya existe una cuenta registrada
+con ese correo) se realiza al momento de persistir el registro y corresponde
+a `409 Conflict` (ver sección siguiente); un email con formato inválido nunca
+llega a verificarse contra la base de datos.
 
 ```json
 {
