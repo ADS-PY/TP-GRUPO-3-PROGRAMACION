@@ -17,13 +17,18 @@ npm install
 
 ### Configuración de autenticación
 
-Para habilitar el registro e inicio de sesión con Supabase, copiá `.env.example`
-como `.env.local` y completá sus valores:
+Para habilitar el flujo de registro con el backend y el inicio de sesión con Supabase,
+copiá `.env.example` como `.env.local` y completá sus valores:
 
 ```bash
+VITE_API_BASE_URL=http://localhost:3000
 VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
 VITE_SUPABASE_ANON_KEY=tu-clave-anon-publica
 ```
+
+`VITE_API_BASE_URL` se usa para enviar `POST /auth/register` y consumir la respuesta
+estandarizada del backend. Si no está configurada, el formulario de registro mantiene
+la integración existente con Supabase.
 
 La clave debe ser la clave pública `anon` del proyecto de Supabase. No agregues
 claves privadas ni `service_role` al frontend.

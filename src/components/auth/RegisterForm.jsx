@@ -74,7 +74,20 @@ export default function RegisterForm() {
   };
 
   const getRegisterErrorMessage = (error) => {
+    const backendErrorMessage = error?.errors?.find(
+      (detail) => typeof detail === "string" || typeof detail?.message === "string",
+    );
     const message = error?.message?.toLowerCase() || "";
+
+    if (error?.status === 400 && backendErrorMessage) {
+      return typeof backendErrorMessage === "string"
+        ? backendErrorMessage
+        : backendErrorMessage.message;
+    }
+
+    if (error?.status === 409) {
+      return "El correo electrónico ya está registrado.";
+    }
 
     if (message.includes("already registered") || message.includes("already exists")) {
       return "El correo electrónico ya está registrado.";
@@ -128,13 +141,14 @@ export default function RegisterForm() {
       setTouched({});
       setErrors({});
 
-      if (data.session) {
+      if (data?.data?.session) {
         navigate("/");
         return;
       }
 
       setSuccessMessage(
-        "Cuenta creada. Revisá tu correo para confirmarla antes de iniciar sesión.",
+        data?.message ||
+          "Cuenta creada. Revisá tu correo para confirmarla antes de iniciar sesión.",
       );
     } catch (error) {
       setGeneralError(getRegisterErrorMessage(error));
