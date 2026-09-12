@@ -23,7 +23,6 @@
   .kinetic-gradient {
     @apply bg-gradient-to-br from-primary to-secondary;
   }
-  }
 
   /* Curva inferior de la sección principal */
   .hero-curve {
