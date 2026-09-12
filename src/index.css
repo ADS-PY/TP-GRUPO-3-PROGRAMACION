@@ -17,9 +17,12 @@
 }
 
 @layer components {
-  /* Fondo principal alineado a la paleta oficial Consulir */
+  /* Fondo principal alineado a la paleta oficial Consulir.
+     Se limita el gradiente a primary/secondary para mantener
+     contraste WCAG AA con texto blanco. */
   .kinetic-gradient {
-    @apply bg-gradient-to-br from-primary via-secondary to-tertiary;
+    @apply bg-gradient-to-br from-primary to-secondary;
+  }
   }
 
   /* Curva inferior de la sección principal */
