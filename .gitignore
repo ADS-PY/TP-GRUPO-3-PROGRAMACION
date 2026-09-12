@@ -22,13 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
-.env
-.env.local
-=======
-
-# Supabase
+# Supabase / variables de entorno
 .env
 .env.local
 .env.*.local
->>>>>>> develop
