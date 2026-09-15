@@ -96,7 +96,9 @@ export default function RegisterForm() {
     setGeneralError("");
 
     if (Object.keys(validationErrors).length > 0) {
-      setGeneralError("Revisá los campos marcados antes de continuar.");
+      setGeneralError(
+        "Revisá los campos marcados antes de continuar.",
+      );
       return;
     }
 
@@ -132,7 +134,9 @@ export default function RegisterForm() {
       setTimeout(() => {
         navigate("/login");
       }, 800);
-    } catch {
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+
       setGeneralError(
         "Ocurrió un error al crear la cuenta. Intentá nuevamente.",
       );
@@ -146,20 +150,29 @@ export default function RegisterForm() {
       <div className="register-card">
         <div className="register-header">
           <p className="brand-label">Consulir</p>
+
           <h1>Crea tu cuenta</h1>
+
           <p>
-            Unite a Consulir y gestioná tus finanzas con precisión profesional.
+            Unite a Consulir y gestioná tus finanzas con precisión
+            profesional.
           </p>
         </div>
 
         {generalError && (
-          <div className="alert alert-error" role="alert">
+          <div
+            className="alert alert-error"
+            role="alert"
+          >
             {generalError}
           </div>
         )}
 
         {successMessage && (
-          <div className="alert alert-success" role="status">
+          <div
+            className="alert alert-success"
+            role="status"
+          >
             {successMessage}
           </div>
         )}
@@ -171,7 +184,9 @@ export default function RegisterForm() {
           aria-busy={isLoading}
         >
           <div className="form-group">
-            <label htmlFor="nombre">Nombre completo</label>
+            <label htmlFor="nombre">
+              Nombre completo
+            </label>
 
             <input
               id="nombre"
@@ -185,7 +200,9 @@ export default function RegisterForm() {
               className={getInputClassName("nombre")}
               aria-invalid={Boolean(errors.nombre)}
               aria-describedby={
-                errors.nombre ? "nombre-error" : undefined
+                errors.nombre
+                  ? "nombre-error"
+                  : undefined
               }
             />
 
@@ -216,7 +233,9 @@ export default function RegisterForm() {
               className={getInputClassName("email")}
               aria-invalid={Boolean(errors.email)}
               aria-describedby={
-                errors.email ? "email-error" : undefined
+                errors.email
+                  ? "email-error"
+                  : undefined
               }
             />
 
@@ -239,16 +258,26 @@ export default function RegisterForm() {
               <input
                 id="password"
                 name="password"
-                type={showPassword ? "text" : "password"}
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
                 placeholder="Mínimo 8 caracteres"
                 value={formData.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 disabled={isLoading}
-                className={getInputClassName("password")}
-                aria-invalid={Boolean(errors.password)}
+                className={getInputClassName(
+                  "password",
+                )}
+                aria-invalid={Boolean(
+                  errors.password,
+                )}
                 aria-describedby={
-                  errors.password ? "password-error" : undefined
+                  errors.password
+                    ? "password-error"
+                    : undefined
                 }
               />
 
@@ -256,7 +285,9 @@ export default function RegisterForm() {
                 type="button"
                 className="password-toggle"
                 onClick={() =>
-                  setShowPassword((prevValue) => !prevValue)
+                  setShowPassword(
+                    (prevValue) => !prevValue,
+                  )
                 }
                 disabled={isLoading}
                 aria-label={
@@ -265,7 +296,9 @@ export default function RegisterForm() {
                     : "Mostrar contraseña"
                 }
               >
-                {showPassword ? "Ocultar" : "Ver"}
+                {showPassword
+                  ? "Ocultar"
+                  : "Ver"}
               </button>
             </div>
 
@@ -289,14 +322,16 @@ export default function RegisterForm() {
           <button
             type="submit"
             className="submit-button"
-            disabled={isLoading || !isFormValid}
+            disabled={
+              isLoading || !isFormValid
+            }
           >
             {isLoading ? (
               <span className="button-loading">
                 <span
                   className="spinner"
                   aria-hidden="true"
-                ></span>
+                />
                 Procesando...
               </span>
             ) : (
